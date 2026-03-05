@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brasil Colônia | Plataforma EdTech Premium</title>
+
+    <!-- Bibliotecas e Fontes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        outfit: ['Outfit', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#6366f1',
+                        accent: '#fbbf24',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass-nav {
+            background: rgba(2, 6, 23, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-slate-200 font-inter selection:bg-primary selection:text-white">
+
+    <!-- NAVIGATION -->
+    <nav class="glass-nav fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="navigate('hub')">
+                    <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                        <i data-lucide="book-open" class="text-white w-6 h-6"></i>
+                    </div>
+                    <span class="font-outfit text-xl font-bold tracking-tight text-white hidden md:block">BRASIL <span
+                            class="text-primary">COLÔNIA</span></span>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-1">
+                    <button onclick="navigate('hub')"
+                        class="nav-link active px-4 py-2 text-sm font-medium transition-all hover:text-primary">Início</button>
+                    <button onclick="navigate('mapa')"
+                        class="nav-link px-4 py-2 text-sm font-medium transition-all hover:text-primary opacity-60">Mapa
+                        Mental</button>
+                    <button onclick="navigate('slides')"
+                        class="nav-link px-4 py-2 text-sm font-medium transition-all hover:text-primary opacity-60">Slides</button>
+                    <button onclick="navigate('roteiro')"
+                        class="nav-link px-4 py-2 text-sm font-medium transition-all hover:text-primary opacity-60">Roteiro</button>
+                    <button onclick="navigate('questoes')"
+                        class="nav-link px-4 py-2 text-sm font-medium transition-all hover:text-primary opacity-60">Questões</button>
+                    <button onclick="navigate('quiz')"
+                        class="nav-link px-4 py-2 text-sm font-medium transition-all hover:text-primary opacity-60">Quiz</button>
+                    <button onclick="navigate('plano')"
+                        class="nav-link px-4 py-2 text-sm font-medium transition-all hover:text-primary opacity-60">Plano</button>
+                </div>
+
+                <button
+                    class="bg-primary/10 text-primary px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary hover:text-white transition-all duration-300">
+                    Sair da Aula
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+
+        <!-- SECTION: HUB (DASHBOARD) -->
+        <section id="hub" class="page-content active">
+            <div class="mb-12" data-aos="fade-down">
+                <h1 class="font-outfit text-4xl md:text-6xl text-white mb-4">Bem-vindo à <span
+                        class="text-primary">Experiência.</span></h1>
+                <p class="text-slate-400 text-lg max-w-2xl">Explore a formação do território brasileiro através de
+                    dados, mapas e interatividade de alto nível.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- CARD 1: SLIDES -->
+                <div data-aos="fade-up" data-aos-delay="100" onclick="navigate('slides')"
+                    class="group bg-slate-900/50 border border-slate-800 p-8 rounded-3xl hover:border-primary/50 transition-all cursor-pointer hover:translate-y-[-4px]">
+                    <div
+                        class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="play" class="text-indigo-500 w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-outfit text-xl text-white mb-2">Slides Históricos</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">14 telas ultra visuais com gráficos
+                        ApexCharts e imagens HD.</p>
+                    <div class="flex items-center text-indigo-500 font-semibold text-xs uppercase tracking-widest">
+                        Acessar <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- CARD 2: MAPA -->
+                <div data-aos="fade-up" data-aos-delay="200" onclick="navigate('mapa')"
+                    class="group bg-slate-900/50 border border-slate-800 p-8 rounded-3xl hover:border-amber-500/50 transition-all cursor-pointer hover:translate-y-[-4px]">
+                    <div
+                        class="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="network" class="text-amber-500 w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-outfit text-xl text-white mb-2">Mapa Estratégico</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Ciclos econômicos em um mapa mental
+                        interativo e persistente.</p>
+                    <div class="flex items-center text-amber-500 font-semibold text-xs uppercase tracking-widest">
+                        Explorar <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- CARD 3: QUIZ -->
+                <div data-aos="fade-up" data-aos-delay="300" onclick="navigate('quiz')"
+                    class="group bg-slate-900/50 border border-slate-800 p-8 rounded-3xl hover:border-emerald-500/50 transition-all cursor-pointer hover:translate-y-[-4px]">
+                    <div
+                        class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="target" class="text-emerald-500 w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-outfit text-xl text-white mb-2">Quiz Master</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">12 desafios de retenção com feedback
+                        instantâneo e design premium.</p>
+                    <div class="flex items-center text-emerald-500 font-semibold text-xs uppercase tracking-widest">
+                        Testar <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- CARD 4: ROTEIRO -->
+                <div data-aos="fade-up" data-aos-delay="400" onclick="navigate('roteiro')"
+                    class="group bg-slate-900/50 border border-slate-800 p-8 rounded-3xl hover:border-indigo-500/50 transition-all cursor-pointer hover:translate-y-[-4px]">
+                    <div
+                        class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="video" class="text-indigo-400 w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-outfit text-xl text-white mb-2">Roteiro de Vídeo</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Script completo estilo YouTube para cada
+                        slide (14 min).</p>
+                    <div class="flex items-center text-indigo-400 font-semibold text-xs uppercase tracking-widest">
+                        Ver Script <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- CARD 5: ATIVIDADES -->
+                <div data-aos="fade-up" data-aos-delay="500" onclick="navigate('questoes')"
+                    class="group bg-slate-900/50 border border-slate-800 p-8 rounded-3xl hover:border-primary/50 transition-all cursor-pointer hover:translate-y-[-4px]">
+                    <div
+                        class="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="edit-3" class="text-indigo-500 w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-outfit text-xl text-white mb-2">Atividades</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">23 questões analíticas prontas para impressão
+                        e gabarito.</p>
+                    <div class="flex items-center text-indigo-500 font-semibold text-xs uppercase tracking-widest">
+                        Resolver <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- CARD 6: PLANO -->
+                <div data-aos="fade-up" data-aos-delay="600" onclick="navigate('plano')"
+                    class="group bg-slate-900/50 border border-slate-800 p-8 rounded-3xl hover:border-slate-500/50 transition-all cursor-pointer hover:translate-y-[-4px]">
+                    <div
+                        class="w-14 h-14 bg-slate-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="file-text" class="text-slate-400 w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-outfit text-xl text-white mb-2">Plano de Aula</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Documentação BNCC completa para o professor.
+                    </p>
+                    <div class="flex items-center text-slate-400 font-semibold text-xs uppercase tracking-widest">
+                        Ver Plano <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: SLIDES (14 TELAS) -->
+        <section id="slides" class="page-content">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <span id="slide-info" class="text-primary font-bold uppercase tracking-widest text-xs">Slide 1 /
+                            14</span>
+                        <h2 id="slide-title" class="font-outfit text-3xl text-white mt-1">Introdução</h2>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="prevSlide()"
+                            class="w-10 h-10 rounded-full border border-slate-800 flex items-center justify-center hover:bg-slate-800 transition-all"><i
+                                data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                        <button onclick="nextSlide()"
+                            class="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-primary/80 transition-all"><i
+                                data-lucide="chevron-right" class="w-5 h-5"></i></button>
+                    </div>
+                </div>
+
+                <!-- SLIDE CONTAINER -->
+                <div id="slide-viewer"
+                    class="min-h-[550px] bg-slate-900/40 border border-slate-800 rounded-[32px] overflow-hidden relative shadow-2xl">
+                    <!-- Conteúdo injetado via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: MAPA MENTAL -->
+        <section id="mapa" class="page-content">
+            <div class="mb-12 text-center" data-aos="fade-down">
+                <h2 class="font-outfit text-4xl text-white mb-4">Mapa Estratégico <span class="text-amber-500">Brasil
+                        Colônia</span></h2>
+                <p class="text-slate-400">Clique nos ícones para explorar os detalhes de cada ciclo econômico.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- NÓ: PAU-BRASIL -->
+                <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl hover:border-primary/50 transition-all cursor-pointer group"
+                    onclick="toggleDetail('detail-pau')">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary/20">
+                            <i data-lucide="tree-pine" class="text-primary w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-outfit text-xl text-white">Ciclo do Pau-Brasil</h4>
+                        <i data-lucide="chevron-down" class="ml-auto w-5 h-5 text-slate-500 transition-transform"
+                            id="icon-pau"></i>
+                    </div>
+                    <div id="detail-pau"
+                        class="hidden mt-6 pt-6 border-t border-slate-800 text-slate-400 text-sm space-y-3">
+                        <p class="flex items-start"><i data-lucide="check-circle-2"
+                                class="w-4 h-4 mr-2 text-primary shrink-0"></i> Primeira exploração econômica lusitana.
+                        </p>
+                        <p class="flex items-start"><i data-lucide="check-circle-2"
+                                class="w-4 h-4 mr-2 text-primary shrink-0"></i> Uso do Estanco (monopólio real).</p>
+                        <p class="flex items-start"><i data-lucide="check-circle-2"
+                                class="w-4 h-4 mr-2 text-primary shrink-0"></i> Mão de obra indígena via Escambo.</p>
+                    </div>
+                </div>
+
+                <!-- NÓ: AÇÚCAR -->
+                <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl hover:border-amber-500/50 transition-all cursor-pointer group"
+                    onclick="toggleDetail('detail-acucar')">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center group-hover:bg-amber-500/20">
+                            <i data-lucide="wheat" class="text-amber-500 w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-outfit text-xl text-white">Ciclo do Açúcar</h4>
+                        <i data-lucide="chevron-down" class="ml-auto w-5 h-5 text-slate-500 transition-transform"
+                            id="icon-acucar"></i>
+                    </div>
+                    <div id="detail-acucar"
+                        class="hidden mt-6 pt-6 border-t border-slate-800 text-slate-400 text-sm space-y-3">
+                        <p class="flex items-start"><i data-lucide="check-circle-2"
+                                class="w-4 h-4 mr-2 text-amber-500 shrink-0"></i> Sistema de Plantation (Latifúndio +
+                            Escravidão + Monocultura).</p>
+                        <p class="flex items-start"><i data-lucide="check-circle-2"
+                                class="w-4 h-4 mr-2 text-amber-500 shrink-0"></i> Sociedade rural e estratificada.</p>
+                        <p class="flex items-start"><i data-lucide="check-circle-2"
+                                class="w-4 h-4 mr-2 text-amber-500 shrink-0"></i> Principal produto de exportação por
+                            séculos.</p>
+                    </div>
+                </div>
+
+                <!-- NÓ: MINERAÇÃO -->
+                <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl hover:border-emerald-500/50 transition-all cursor-pointer group"
+                    onclick="toggleDetail('detail-ouro')">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center group-hover:bg-emerald-500/20">
+                            <i data-lucide="gem" class="text-emerald-500 w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-outfit text-xl text-white">Ciclo do Ouro</h4>
+                        <i data-lucide="chevron-down" class="ml-auto w-5 h-5 text-slate-500 transition-transform"
+                            id="icon-ouro"></i>
+                    </div>
+                    <div id="detail-ouro"
+                        class="hidden mt-6 pt-6 border-t border-slate-800 text-slate-400 text-sm space-y-3">
+                        <p class="flex items-start"><i data-lucide="check-circle-2"
+                                class="w-4 h-4 mr-2 text-emerald-500 shrink-0"></i> Mudança do eixo econômico para o
+                            Sudeste.</p>
+                        <p class="flex items-start"><i data-lucide="check-circle-2"
+                                class="w-4 h-4 mr-2 text-emerald-500 shrink-0"></i> Surgimento de uma classe média
+                            urbana.</p>
+                        <p class="flex items-start"><i data-lucide="check-circle-2"
+                                class="w-4 h-4 mr-2 text-emerald-500 shrink-0"></i> Intensa fiscalização (O Quinto,
+                            Casas de Fundição).</p>
+                    </div>
+                </div>
+
+                <!-- NÓ: PECUÁRIA -->
+                <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl hover:border-indigo-500/50 transition-all cursor-pointer group"
+                    onclick="toggleDetail('detail-gado')">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center group-hover:bg-indigo-500/20">
+                            <i data-lucide="beef" class="text-indigo-500 w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-outfit text-xl text-white">Ciclo da Pecuária</h4>
+                        <i data-lucide="chevron-down" class="ml-auto w-5 h-5 text-slate-500 transition-transform"
+                            id="icon-gado"></i>
+                    </div>
+                    <div id="detail-gado"
+                        class="hidden mt-6 pt-6 border-t border-slate-800 text-slate-400 text-sm space-y-3">
+                        <p class="flex items-start"><i data-lucide="check-circle-2"
+                                class="w-4 h-4 mr-2 text-indigo-500 shrink-0"></i> Atividade voltada ao mercado interno.
+                        </p>
+                        <p class="flex items-start"><i data-lucide="check-circle-2"
+                                class="w-4 h-4 mr-2 text-indigo-500 shrink-0"></i> Expansão para o Sertão
+                            (interiorização).</p>
+                        <p class="flex items-start"><i data-lucide="check-circle-2"
+                                class="w-4 h-4 mr-2 text-indigo-500 shrink-0"></i> Integração entre as regiões
+                            coloniais.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: QUESTÕES (ATIVIDADES) -->
+        <section id="questoes" class="page-content">
+            <div class="max-w-5xl mx-auto">
+                <div class="mb-12 text-center" data-aos="fade-down">
+                    <h2 class="font-outfit text-4xl text-white mb-4">Atividades de <span
+                            class="text-primary">Consolidação</span></h2>
+                    <p class="text-slate-400 text-lg">23 Questões Analíticas conectadas aos slides históricos.</p>
+                </div>
+
+                <!-- GALERIA DE APOIO -->
+                <div class="bg-slate-900/20 border border-slate-800 rounded-3xl p-8 mb-12">
+                    <h3 class="font-outfit text-xl text-white mb-6 flex items-center gap-3">
+                        <i data-lucide="image" class="text-primary"></i> Galeria de Análise Visual
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="group relative overflow-hidden rounded-2xl aspect-video bg-slate-800">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/e6da4d3b31b36f278e2402f37a526c9dbfced23b.jpg"
+                                class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="group relative overflow-hidden rounded-2xl aspect-video bg-slate-800">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/207cfd65b87c9a2c0d49db6d08490d9d91e6d63c.jpg"
+                                class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="group relative overflow-hidden rounded-2xl aspect-video bg-slate-800">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/c7479bb1c91f72a67fc04a8577491e496effc810.jpg"
+                                class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="group relative overflow-hidden rounded-2xl aspect-video bg-slate-800">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/e54154a1e82475ecb1c080e77dbb2a9b84b1c67f.jpg"
+                                class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 mb-16" id="questoes-lista">
+                    <!-- Javascript carregará as questões aqui -->
+                </div>
+
+                <!-- GABARITO -->
+                <div class="bg-slate-200 rounded-[32px] p-12 text-slate-900">
+                    <h3 class="font-outfit text-2xl mb-8 flex items-center gap-3">
+                        <i data-lucide="check-square" class="text-primary"></i> Gabarito de Referência
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm" id="gabarito-lista">
+                        <!-- Javascript carregará o gabarito aqui -->
+                    </div>
+                    <button onclick="window.print()"
+                        class="mt-12 w-full md:w-auto bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:opacity-80 transition-all flex items-center justify-center gap-3">
+                        <i data-lucide="printer"></i> Imprimir Atividade Completa
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: ROTEIRO (SCRIPT YOUTUBE) -->
+        <section id="roteiro" class="page-content">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-12 text-center" data-aos="fade-down">
+                    <h2 class="font-outfit text-4xl text-white mb-4">Roteiro de <span
+                            class="text-indigo-400">Vídeo</span></h2>
+                    <p class="text-slate-400">Script completo estilo YouTube para cada slide (11-14 min de aula).</p>
+                </div>
+
+                <div id="roteiro-box" class="space-y-6">
+                    <!-- Javascript carregará o roteiro aqui -->
+                </div>
+            </div>
+        </section>
+        <section id="quiz" class="page-content">
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-12 text-center" data-aos="fade-down">
+                    <h2 class="font-outfit text-4xl text-white mb-4">Desafio <span
+                            class="text-emerald-500">Master</span></h2>
+                    <p class="text-slate-400">Teste sua retenção de conteúdo com feedback instantâneo.</p>
+                </div>
+
+                <div id="quiz-box" class="space-y-6">
+                    <!-- PERGUNTA 1 -->
+                    <div class="bg-slate-900/40 border border-slate-800 p-8 rounded-[32px] question-card">
+                        <span class="text-primary font-bold text-xs uppercase tracking-widest mb-4 block">QUESTÃO
+                            01</span>
+                        <h4 class="text-xl text-white mb-8">Qual era a principal mão de obra utilizada no ciclo do
+                            Açúcar?</h4>
+                        <div class="grid grid-cols-1 gap-4">
+                            <button onclick="checkAnswer(this, true)"
+                                class="text-left p-5 border border-slate-800 rounded-2xl hover:bg-slate-800 transition-all flex items-center gap-4">
+                                <span
+                                    class="w-8 h-8 rounded-full border border-slate-700 flex items-center justify-center text-xs font-bold">A</span>
+                                Escravizados de origem africana
+                            </button>
+                            <button onclick="checkAnswer(this, false)"
+                                class="text-left p-5 border border-slate-800 rounded-2xl hover:bg-slate-800 transition-all flex items-center gap-4">
+                                <span
+                                    class="w-8 h-8 rounded-full border border-slate-700 flex items-center justify-center text-xs font-bold">B</span>
+                                Imigrantes europeus assalariados
+                            </button>
+                            <button onclick="checkAnswer(this, false)"
+                                class="text-left p-5 border border-slate-800 rounded-2xl hover:bg-slate-800 transition-all flex items-center gap-4">
+                                <span
+                                    class="w-8 h-8 rounded-full border border-slate-700 flex items-center justify-center text-xs font-bold">C</span>
+                                Apenas mão de obra indígena livre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- SECTION: PLANO DE AULA COMPLETO -->
+        <section id="plano" class="page-content">
+            <div class="max-w-4xl mx-auto bg-slate-900/40 border border-slate-800 rounded-[32px] overflow-hidden">
+                <div class="bg-indigo-600 p-8 md:p-12 text-white">
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] opacity-80">Documentação Pedagógica</span>
+                    <h2 class="font-outfit text-4xl mt-2">Plano de Ensino Estratégico</h2>
+                </div>
+                <div class="p-8 md:p-12 space-y-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-outfit text-primary uppercase text-xs tracking-widest mb-4">Habilidades BNCC
+                            </h4>
+                            <ul class="space-y-4 text-slate-400 text-sm">
+                                <li class="flex gap-3"><i data-lucide="check-circle"
+                                        class="w-5 h-5 text-indigo-500 shrink-0"></i> (EF07GE04) Analisar a distribuição
+                                    territorial da população brasileira.</li>
+                                <li class="flex gap-3"><i data-lucide="check-circle"
+                                        class="w-5 h-5 text-indigo-500 shrink-0"></i> (EF07GE03) Selecionar argumentos
+                                    que reconheçam territorialidades.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-outfit text-primary uppercase text-xs tracking-widest mb-4">Objetivos</h4>
+                            <ul class="space-y-2 text-slate-400 text-sm">
+                                <li>• Compreender os ciclos econômicos coloniais.</li>
+                                <li>• Identificar heranças espaciais e sociais.</li>
+                                <li>• Analisar dados demográficos e econômicos.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pt-8 border-t border-slate-800">
+                        <h4 class="font-outfit text-primary uppercase text-xs tracking-widest mb-6">Metodologia e
+                            Avaliação</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-slate-800/30 p-4 rounded-2xl">
+                                <span class="block text-white font-bold mb-2">Aula 1</span>
+                                <p class="text-xs text-slate-500 leading-relaxed">Exposição dialogada com slides ultra
+                                    visuais e mapa mental estratégico.</p>
+                            </div>
+                            <div class="bg-slate-800/30 p-4 rounded-2xl">
+                                <span class="block text-white font-bold mb-2">Aula 2</span>
+                                <p class="text-xs text-slate-500 leading-relaxed">Resolução de questões de consolidação
+                                    e gamificação com quiz master.</p>
+                            </div>
+                            <div class="bg-slate-800/30 p-4 rounded-2xl">
+                                <span class="block text-white font-bold mb-2">Avaliação</span>
+                                <p class="text-xs text-slate-500 leading-relaxed">Desempenho no quiz (formativa) e
+                                    entrega das 23 questões (somativa).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-8 border-t border-slate-800 flex justify-between items-center">
+                        <p class="text-[10px] text-slate-600 italic">Referência: FAUSTO, Boris. História do Brasil.
+                            Edusp, 2019.</p>
+                        <button onclick="window.print()"
+                            class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 px-6 py-3 rounded-xl text-sm font-semibold transition-all">
+                            <i data-lucide="printer" class="w-4 h-4"></i> Imprimir Plano Completo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPTS CONSOLIDADOS -->
+    <script>
+        // INICIALIZAÇÃO
+        lucide.createIcons();
+        AOS.init({ duration: 800, once: true });
+
+        // ESTADO GLOBAL - preservado entre navegações
+        let currentSlideIdx = 0;
+        // Armazena o estado de expansão dos nós do Mapa Mental
+        const mapaExpandedState = {};
+
+        // FUNÇÕES DE NAVEGAÇÃO SPA
+        function navigate(id) {
+            document.querySelectorAll('.page-content').forEach(el => el.classList.remove('active'));
+            updateNavLinks(id);
+            const target = document.getElementById(id);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            if (id === 'slides') renderSlide();
+            if (id === 'questoes') renderQuestoes();
+            if (id === 'quiz') renderQuiz();
+            if (id === 'roteiro') renderRoteiro();
+            // Recria ícones APENAS em elementos que não são do mapa mental
+            lucide.createIcons();
+            // Restaura estado do mapa mental sem recriar os elementos
+            if (id === 'mapa') restoreMapaState();
+        }
+
+        function updateNavLinks(id) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active', 'opacity-100');
+                if (link.getAttribute('onclick').includes(id)) {
+                    link.classList.add('active', 'opacity-100');
+                } else {
+                    link.classList.add('opacity-60');
+                }
+            });
+        }
+
+        // Restaura o estado visual dos nós do mapa mental
+        function restoreMapaState() {
+            Object.keys(mapaExpandedState).forEach(id => {
+                const el = document.getElementById(id);
+                const key = id.replace('detail-', '');
+                const icon = document.getElementById('icon-' + key);
+                if (!el) return;
+                if (mapaExpandedState[id]) {
+                    el.classList.remove('hidden');
+                    if (icon) icon.style.transform = 'rotate(180deg)';
+                } else {
+                    el.classList.add('hidden');
+                    if (icon) icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        }
+
+        function toggleDetail(id) {
+            const el = document.getElementById(id);
+            const key = id.replace('detail-', '');
+            const icon = document.getElementById('icon-' + key);
+            if (el && el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                if (icon) icon.style.transform = 'rotate(180deg)';
+                mapaExpandedState[id] = true;
+            } else if (el) {
+                el.classList.add('hidden');
+                if (icon) icon.style.transform = 'rotate(0deg)';
+                mapaExpandedState[id] = false;
+            }
+        }
+
+        function checkAnswer(btn, isCorrect) {
+            const parent = btn.closest('.question-card') || btn.parentElement;
+            parent.querySelectorAll('button').forEach(b => { b.disabled = true; b.classList.add('opacity-50'); });
+            if (isCorrect) {
+                btn.classList.remove('opacity-50');
+                btn.classList.add('border-emerald-500', 'bg-emerald-500/10', 'text-emerald-400', '!opacity-100');
+            } else {
+                btn.classList.remove('opacity-50');
+                btn.classList.add('border-rose-500', 'bg-rose-500/10', 'text-rose-400', '!opacity-100');
+                // Destacar a correta
+                parent.querySelectorAll('button').forEach(b => {
+                    if (b.dataset.correct === 'true') {
+                        b.classList.add('border-emerald-500/50', 'bg-emerald-500/5', 'text-emerald-400/70', '!opacity-80');
+                    }
+                });
+            }
+        }
+
+        // DADOS: SLIDES (14 TELAS)
+        const slideData = [
+            { title: "Como a ECONOMIA Desenhou o Brasil", content: "<div class='p-12 text-center h-full flex flex-col justify-center items-center h-full'><div class='text-8xl mb-8'>🏛️</div><h1 class='text-5xl md:text-7xl font-outfit font-black mb-6 uppercase tracking-tighter'>O DESIGN DA <br><span class='text-primary'>COLÔNIA</span></h1><p class='text-2xl text-slate-400 max-w-2xl text-center'>Entenda como o lucro e a exploração organizaram o território que chamamos de Brasil hoje.</p></div>", bg: "linear-gradient(rgba(2,6,23,0.9), rgba(2,6,23,0.9)), url('https://pplx-res.cloudinary.com/image/upload/pplx_search_images/e6da4d3b31b36f278e2402f37a526c9dbfced23b.jpg')" },
+            { title: "Por que você VAI amar essa aula?", content: "<div class='p-12 flex flex-col justify-center h-full'><ul class='space-y-8 text-2xl'><li class='flex items-start gap-5'><i data-lucide='check-circle-2' class='text-primary w-8 h-8 shrink-0'></i> Entenda FINALMENTE por que o Brasil é assim hoje.</li><li class='flex items-start gap-5'><i data-lucide='check-circle-2' class='text-primary w-8 h-8 shrink-0'></i> Descubra como dinheiro e poder organizaram o território.</li><li class='flex items-start gap-5'><i data-lucide='check-circle-2' class='text-primary w-8 h-8 shrink-0'></i> Onde ver as marcas da colônia nas cidades atuais.</li></ul></div>" },
+            { title: "🌳 Pau-Brasil: O Primeiro ROUBO", content: "<div class='p-12 flex flex-col justify-center h-full'><ul class='space-y-8 text-2xl'><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-primary w-8 h-8 shrink-0'></i> Madeira VERMELHA valia OURO na Europa.</li><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-primary w-8 h-8 shrink-0'></i> Indígenas forçados via Escambo.</li><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-primary w-8 h-8 shrink-0'></i> Resultado: Primeira grande destruição da Mata Atlântica.</li></ul></div>", bg: "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://pplx-res.cloudinary.com/image/upload/pplx_search_images/e6da4d3b31b36f278e2402f37a526c9dbfced23b.jpg')" },
+            { title: "🌾 Açúcar: A MÁQUINA DE DINHEIRO", content: "<div class='p-12 flex flex-col justify-center h-full'><ul class='space-y-8 text-2xl'><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-amber-500 w-8 h-8 shrink-0'></i> Nordeste virou FÁBRICA de açúcar pro mundo.</li><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-amber-500 w-8 h-8 shrink-0'></i> Plantation = latifúndio + escravidão + monocultura.</li><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-amber-500 w-8 h-8 shrink-0'></i> Criou a desigualdade social atual.</li></ul></div>", bg: "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://pplx-res.cloudinary.com/image/upload/pplx_search_images/207cfd65b87c9a2c0d49db6d08490d9d91e6d63c.jpg')" },
+            { title: "🐂 Gado: O Brasil Foi PRA DENTRO", content: "<div class='p-12 flex flex-col justify-center h-full'><ul class='space-y-8 text-2xl'><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-indigo-400 w-8 h-8 shrink-0'></i> Criação de gado EMPURROU o Brasil pro interior.</li><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-indigo-400 w-8 h-8 shrink-0'></i> Surgiu o sertão nordestino e as fazendas do Sul.</li><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-indigo-400 w-8 h-8 shrink-0'></i> Interiorização absoluta do território.</li></ul></div>", bg: "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://pplx-res.cloudinary.com/image/upload/pplx_search_images/c7479bb1c91f72a67fc04a8577491e496effc810.jpg')" },
+            { title: "⚒️ Ouro: A CORRIDA QUE MUDOU TUDO", content: "<div class='p-12 flex flex-col justify-center h-full'><ul class='space-y-8 text-2xl'><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-emerald-400 w-8 h-8 shrink-0'></i> Séc. 18: FEBRE DO OURO em Minas Gerais!</li><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-emerald-400 w-8 h-8 shrink-0'></i> Cidades : Ouro Preto, Mariana e Diamantina.</li><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-emerald-400 w-8 h-8 shrink-0'></i> Mudança do eje político para o Sudeste.</li></ul></div>", bg: "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://pplx-res.cloudinary.com/image/upload/pplx_search_images/e54154a1e82475ecb1c080e77dbb2a9b84b1c67f.jpg')" },
+            { title: "🌿 Amazônia: O Tesouro Escondido", content: "<div class='p-12 flex flex-col justify-center h-full'><ul class='space-y-8 text-2xl'><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-emerald-500 w-8 h-8 shrink-0'></i> 'Drogas do sertão' = especiarias da floresta.</li><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-emerald-500 w-8 h-8 shrink-0'></i> Exploração PELOS RIOS da Amazônia.</li><li class='flex items-start gap-5'><i data-lucide='arrow-right' class='text-emerald-500 w-8 h-8 shrink-0'></i> Garantiu a soberania lusitana no Norte.</li></ul></div>", bg: "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://pplx-res.cloudinary.com/image/upload/pplx_search_images/be29209bc5f7273262e3c8e6801ccaf29887ff69.jpg')" },
+            { title: "🗺️ Cada Ciclo = Uma Região", content: "<div class='p-12 grid grid-cols-2 gap-6 text-2xl'><div class='bg-slate-800/50 p-6 rounded-2xl'>🌳 Litoral: Pau-Brasil</div><div class='bg-slate-800/50 p-6 rounded-2xl'>🌾 Nordeste: Açúcar</div><div class='bg-slate-800/50 p-6 rounded-2xl'>🐂 Sertão/Sul: Gado</div><div class='bg-slate-800/50 p-6 rounded-2xl'>⚒️ Sudeste: Ouro</div><div class='bg-slate-800/50 p-6 rounded-2xl col-span-2 text-center'>🌿 Amazônia: Drogas</div></div>" },
+            { title: "🏙️ O Que SOBROU da Colônia?", content: "<div class='p-12 flex flex-col justify-center h-full'><ul class='space-y-8 text-2xl'><li class='flex items-start gap-5'><i data-lucide='info' class='text-primary w-8 h-8 shrink-0'></i> Cidades históricas: Ouro Preto, Olinda, Paraty.</li><li class='flex items-start gap-5'><i data-lucide='info' class='text-primary w-8 h-8 shrink-0'></i> Latifúndio e herança fundiária.</li><li class='flex items-start gap-5'><i data-lucide='info' class='text-primary w-8 h-8 shrink-0'></i> Desigualdade e cultura brasileira.</li></ul></div>", bg: "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://pplx-res.cloudinary.com/image/upload/pplx_search_images/1f7053e5d2f687d691bb2902d3cb77bb152c01e5.jpg')" },
+            { title: "💡 A Ideia Central", content: "<div class='p-12 text-center h-full flex flex-col justify-center'><p class='text-4xl leading-relaxed italic text-slate-300 font-outfit'>'Do pau-brasil ao ouro, cada ciclo ORGANIZOU o espaço brasileiro. História não é passado. É explicação do presente.'</p></div>" },
+            { title: "📊 O Boom dos Engenhos (1570-1620)", content: "<div class='p-12 h-full flex flex-col justify-center'><div id='engenhos-chart' class='min-h-[400px]'></div><p class='text-center text-slate-400 mt-4 italic'>Salto de 60 para 190+ engenhos ativos no Nordeste.</p></div>" },
+            { title: "⛓️ O Peso da Escravidão", content: "<div class='p-12 h-full flex flex-col justify-center'><div id='escravidao-chart' class='min-h-[400px]'></div><p class='text-center text-slate-400 mt-4 italic'>60% da população colonial era composta por escravizados (1750).</p></div>" },
+            { title: "💰 Açúcar vs Ouro: Rendimento", content: "<div class='p-12 text-center flex flex-col justify-center items-center h-full'><div class='text-7xl md:text-9xl font-black text-amber-500 mb-6 font-outfit'>£ 300M</div><p class='text-2xl text-slate-400 max-w-xl'>O Ciclo do Açúcar rendeu 3x mais lucro líquido total que o Ouro devido à sua duração secular.</p></div>" },
+            { title: "✏️ Próximos Passos", content: "<div class='p-12 text-center flex flex-col justify-center items-center h-full'><h3 class='text-4xl font-bold mb-10 font-outfit'>MISSÃO CUMPRIDA!</h3><div class='flex flex-wrap justify-center gap-6'><button onclick='navigate(\"questoes\")' class='bg-primary/20 text-primary px-10 py-5 rounded-2xl font-bold hover:bg-primary/30 transition-all'>23 QUESTÕES</button><button onclick='navigate(\"quiz\")' class='bg-emerald-500/20 text-emerald-400 px-10 py-5 rounded-2xl font-bold hover:bg-emerald-500/30 transition-all'>QUIZ MASTER</button></div></div>" }
+        ];
+
+        // RENDERIZADORES
+        function renderSlide() {
+            const slide = slideData[currentSlideIdx];
+            const viewer = document.getElementById('slide-viewer');
+            if (!viewer) return;
+            document.getElementById('slide-title').innerText = slide.title;
+            document.getElementById('slide-info').innerText = `Slide ${currentSlideIdx + 1} / ${slideData.length}`;
+            viewer.innerHTML = slide.content;
+            viewer.style.backgroundImage = slide.bg || 'none';
+            viewer.style.backgroundSize = 'cover';
+            viewer.style.backgroundPosition = 'center';
+            if (slide.title.includes("Boom")) setTimeout(renderEngenhosChart, 100);
+            if (slide.title.includes("Peso")) setTimeout(renderEscravidaoChart, 100);
+            lucide.createIcons();
+        }
+
+        function nextSlide() { if (currentSlideIdx < slideData.length - 1) { currentSlideIdx++; renderSlide(); } }
+        function prevSlide() { if (currentSlideIdx > 0) { currentSlideIdx--; renderSlide(); } }
+
+        function renderEngenhosChart() {
+            const el = document.querySelector("#engenhos-chart");
+            if (!el) return;
+            el.innerHTML = '';
+            new ApexCharts(el, {
+                series: [{ name: 'Engenhos', data: [60, 120, 190] }],
+                chart: { type: 'bar', height: 400, toolbar: { show: false } },
+                colors: ['#6366f1'],
+                xaxis: { categories: ["1570", "1590", "1620"], labels: { style: { colors: '#94a3b8' } } },
+                theme: { mode: 'dark' }
+            }).render();
+        }
+
+        function renderEscravidaoChart() {
+            const el = document.querySelector("#escravidao-chart");
+            if (!el) return;
+            el.innerHTML = '';
+            new ApexCharts(el, {
+                series: [60, 40],
+                chart: { type: 'donut', height: 400 },
+                labels: ['Escravizados', 'Livres'],
+                colors: ['#ef4444', '#6366f1'],
+                theme: { mode: 'dark' }
+            }).render();
+        }
+
+        // DADOS: QUESTÕES (23 ITENS RESTAURADOS COM CONTEÚDO REAL)
+        const questoesData = [
+            { id: 1, cat: "A", slide: 3, titulo: "Extração do Pau-Brasil", texto: "A primeira atividade econômica explorada pelos portugueses no Brasil foi a extração do pau-brasil. Explique por que essa madeira era tão valiosa na Europa e qual foi o principal impacto ambiental dessa exploração.", resp: "A madeira continha tinta vermelha usada para tingir tecidos de luxo na Europa. O principal impacto foi a destruição de grande parte da Mata Atlântica litorânea." },
+            { id: 2, cat: "A", slide: 4, titulo: "Sistema de Plantation", texto: "O cultivo de cana-de-açúcar funcionava pelo sistema plantation. Quais são as três características principais desse sistema? Como ele definiu a estrutura social da colônia?", resp: "Latifúndio (grandes propriedades), monocultura (cultivo de um único produto) e trabalho escravizado de africanos. Esse sistema criou profunda desigualdade social e concentração de poder." },
+            { id: 3, cat: "A", slide: 5, titulo: "Pecuária e Interiorização", texto: "Como a atividade pecuária contribuiu para a interiorização do território brasileiro durante o período colonial? Cite dois efeitos concretos dessa expansão.", resp: "A criação de gado se expandiu pelo sertão nordestino e interior, levando pessoas a ocupar essas áreas. Efeitos: surgimento de rotas e formação de povoados no interior do país." },
+            { id: 4, cat: "A", slide: 6, titulo: "Mineração de Ouro", texto: "A descoberta de ouro no final do século 17 provocou mudanças significativas. Cite duas dessas mudanças e explique como elas afetaram a distribuição da população colonial.", resp: "Migração massiva para a região das minas; surgimento de cidades como Ouro Preto e Mariana; deslocamento do eixo econômico para o Sudeste." },
+            { id: 5, cat: "A", slide: 7, titulo: "Drogas do Sertão", texto: "O que eram as 'drogas do sertão' e em qual região do Brasil elas eram exploradas? Qual era o papel estratégico dessa exploração para Portugal?", resp: "Produtos naturais da floresta amazônica (especiarias, ervas, resinas) com valor comercial na Europa, exploradas na região amazônica. Garantiram a presença portuguesa no Norte e evitaram invasões estrangeiras." },
+            { id: 6, cat: "A", slide: 4, titulo: "Região Nordeste e o Açúcar", texto: "Por que a região Nordeste foi tão importante economicamente durante os séculos 16 e 17? Cite pelo menos dois fatores geográficos e históricos que favoreceram essa centralidade.", resp: "Concentrou os engenhos de cana-de-açúcar, principal produto de exportação colonial. Fatores: clima adequado para a cana, proximidade com portos e rotas do Atlântico (Salvador, Recife)." },
+            { id: 7, cat: "A", slide: 3, titulo: "Impacto Ambiental do Pau-Brasil", texto: "Qual foi o impacto ambiental da extração do pau-brasil no litoral brasileiro? Como esse processo se diferencia dos modelos de exploração sustentável modernos?", resp: "Destruição de grande parte da Mata Atlântica litorânea. A extração colonial era predatória, sem preocupação com reposição ou limite de coleta, ao contrário dos modelos sustentáveis atuais." },
+            { id: 8, cat: "A", slide: 4, titulo: "Os Engenhos Coloniais", texto: "O que eram os engenhos e qual era sua função na economia açucareira colonial? Descreva a estrutura social típica de um engenho.", resp: "Unidades produtoras de açúcar, com moenda, casa-grande, senzala e canaviais. Processavam a cana para exportação. Estrutura: senhor de engenho no topo, feitores, e escravizados realizando o trabalho." },
+            { id: 9, cat: "A", slide: 7, titulo: "A Importância dos Rios na Amazônia", texto: "Como os rios foram importantes para a exploração das 'drogas do sertão' na Amazônia? Qual era o grupo social responsável por essa exploração?", resp: "Os rios eram as principais vias de transporte na floresta amazônica, permitindo acesso às áreas de coleta. Os missionários jesuítas e os colonos ('sertanistas') exploravam os produtos com apoio de mão de obra indígena." },
+            { id: 10, cat: "A", slide: 6, titulo: "Cidades Históricas da Mineração", texto: "Cite duas cidades brasileiras que surgiram ou se desenvolveram durante o ciclo do ouro. Por que essas cidades ficaram 'paradas no tempo' após o esgotamento das minas?", resp: "Ouro Preto, Mariana, Tiradentes, Diamantina, Sabará. Quando o ouro acabou, o fluxo de riqueza e população cessou, impedindo o crescimento e preservando a arquitetura colonial barroca." },
+            { id: 11, cat: "B", slide: 4, titulo: "Análise: Trabalho Escravizado", texto: "Analise: 'O sistema de plantation dependia do trabalho escravizado de africanos.' Explique por que os colonizadores optaram por esse tipo de mão de obra e quais foram as consequências sociais de longo prazo para o Brasil.", resp: "O trabalho escravizado era economicamente vantajoso (sem salários, alta lucratividade). Consequências: desigualdade social profunda, racismo estrutural persistente, concentração de poder nas mãos de poucos proprietários." },
+            { id: 12, cat: "B", slide: "4 e 6", titulo: "Comparação de Ciclos Econômicos", texto: "Compare o ciclo do açúcar com o ciclo do ouro em três aspectos: (a) localização geográfica, (b) tipo de mão de obra predominante, (c) impacto na formação de cidades.", resp: "(a) Açúcar: litoral nordestino; Ouro: interior sudeste. (b) Ambos usaram trabalho escravizado africano. (c) Açúcar: vilas litorâneas e portos; Ouro: cidades planejadas e ricas no interior (Ouro Preto, Tiradentes)." },
+            { id: 13, cat: "B", slide: 9, titulo: "Heranças Coloniais no Brasil Atual", texto: "Cite três heranças do período colonial que ainda estão presentes no Brasil atual (culturais, sociais, econômicas ou territoriais) e explique brevemente cada uma.", resp: "Exemplos: concentração de terras (latifúndio), desigualdade social e racial, cidades históricas patrimônio da humanidade (Ouro Preto, Olinda), culinária regional, festas populares e arquitetura barroca." },
+            { id: 14, cat: "B", slide: 8, titulo: "Economia e Território", texto: "Explique a frase: 'A economia colonial desenhou o mapa do Brasil.' Use exemplos de pelo menos dois ciclos econômicos para fundamentar sua resposta.", resp: "Cada ciclo puxou a ocupação para uma região. Ex: açúcar fixou o Nordeste como polo econômico; ouro levou gente para Minas Gerais; pecuária espalhou o interior com fazendas e rotas." },
+            { id: 15, cat: "B", slide: 4, titulo: "Concentração de Terras", texto: "Como o sistema de plantation contribuiu para a concentração de terras no Brasil? Quais são as consequências dessa concentração visíveis até hoje?", resp: "O plantation exigia grandes extensões controladas por poucos proprietários. Consequências: desigualdade fundiária persistente, conflitos agrários, dificuldade histórica de reforma agrária." },
+            { id: 16, cat: "B", slide: 6, titulo: "Controle da Coroa Portuguesa", texto: "Durante o ciclo do ouro, a Coroa exercia forte controle sobre a produção. Explique como funcionava o sistema dos 'quintos' e por que ele gerou conflitos como a Inconfidência Mineira.", resp: "O 'quinto' era 20% de todo ouro entregue à Coroa. Criado para garantir receita para Portugal e controlar a exploração. A alta carga tributária e a cobrança rigorosa geraram insatisfação que culminou em movimentos como a Inconfidência (1789)." },
+            { id: 17, cat: "B", slide: "4 a 9", titulo: "Impactos Sociais das Atividades Econômicas", texto: "Analise: 'As atividades econômicas coloniais organizaram não só o espaço, mas também as relações sociais.' Desenvolva usando exemplos concretos de pelo menos dois ciclos.", resp: "O plantation criou hierarquias rígidas (senhor x escravo). A mineração gerou uma incipiente classe média urbana. Ambos definiram quem tinha poder, como se organizava o trabalho e onde as pessoas moravam." },
+            { id: 18, cat: "B", slide: 8, titulo: "Rotas Comerciais e Portos", texto: "Explique como a economia colonial influenciou a criação de rotas comerciais e portos no Brasil. Qual é a relação entre essas rotas e as atuais regiões metropolitanas do país?", resp: "A necessidade de escoar produtos levou à criação de portos (Salvador, Recife) e rotas conectando regiões produtoras. Essas cidades portuárias se tornaram as principais metrópoles, mantendo importância econômica até hoje." },
+            { id: 19, cat: "B", slide: 6, titulo: "Mineração e Urbanização", texto: "Por que o ciclo da mineração gerou mais cidades com caráter urbanístico elaborado do que o ciclo do açúcar? Justifique sua resposta com exemplos históricos.", resp: "A mineração atraiu populações concentradas em regiões específicas, gerando demanda por comércio e serviços. Isso criou cidades com igrejas barrocas, largos e infraestrutura mais planejada (Ouro Preto, Mariana, Tiradentes)." },
+            { id: 20, cat: "B", slide: 9, titulo: "Reflexão Crítica: Heranças na Sua Região", texto: "Na sua região ou cidade, você consegue identificar alguma herança do período colonial? Descreva e explique a relação com a história colonial brasileira.", resp: "Resposta pessoal. Avaliar se o aluno identificou elementos locais concretos (nome de cidades, festas, arquitetura, concentração de terras) e os conectou ao período colonial com coerência." },
+            { id: 21, cat: "A+", slide: 11, titulo: "Análise de Dados: Boom do Açúcar", texto: "Observe o gráfico do Slide 11. Qual foi o crescimento aproximado em número de engenhos entre 1570 e 1620? Por que esse período é chamado de 'Boom' do açúcar? Relacione com a demanda europeia.", resp: "Salto de aproximadamente 60 para mais de 190 engenhos ativos no Nordeste. Período chamado de 'Boom' por causa da explosão da produção impulsionada pela alta demanda europeia por açúcar." },
+            { id: 22, cat: "A+", slide: 12, titulo: "Análise de Dados: Demografia Colonial", texto: "Com base no gráfico do Slide 12, qual era a porcentagem estimada de pessoas escravizadas na colônia em 1750? O que esse dado revela sobre a estrutura econômica e social da época?", resp: "Aproximadamente 60% da população colonial era composta por escravizados. Isso revela uma economia completamente dependente do trabalho forçado e uma estrutura social profundamente desigual e violenta." },
+            { id: 23, cat: "A+", slide: 13, titulo: "Comparativo de Riqueza: Açúcar x Ouro", texto: "Considerando as informações dos Slides 11, 12 e 13, explique por que, apesar do pico intenso da mineração, o açúcar ainda é considerado a atividade que rendeu mais lucros totais para Portugal a longo prazo.", resp: "O ciclo do açúcar durou mais de três séculos, gerando receita constante (estimada em £300 milhões). O ouro teve um pico mais intenso mas curto (décadas). A estabilidade temporal do açúcar superou o rendimento total do ouro." }
+        ];
+
+        function renderQuestoes() {
+            const lista = document.getElementById('questoes-lista');
+            const gab = document.getElementById('gabarito-lista');
+            if (!lista) return;
+            lista.innerHTML = ''; gab.innerHTML = '';
+            questoesData.forEach(q => {
+                const catColor = q.cat === 'A' ? 'text-indigo-400 bg-indigo-500/10' : q.cat === 'B' ? 'text-amber-400 bg-amber-500/10' : 'text-emerald-400 bg-emerald-500/10';
+                lista.innerHTML += `
+                <div class="bg-slate-900/40 border border-slate-800 p-8 rounded-3xl" data-aos="fade-up">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-primary font-bold text-xs uppercase">QUESTÃO ${String(q.id).padStart(2, '0')}</span>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${catColor}">Cat. ${q.cat}</span>
+                        <span class="text-slate-600 text-xs ml-auto">📍 Slide ${q.slide}</span>
+                    </div>
+                    <h4 class="text-xl text-white font-outfit mb-3">${q.titulo}</h4>
+                    <p class="text-slate-400 leading-relaxed">${q.texto}</p>
+                </div>`;
+                gab.innerHTML += `
+                <div class="p-5 bg-white/5 rounded-2xl border border-slate-300/10">
+                    <span class="font-bold text-primary block text-xs mb-2">Q${String(q.id).padStart(2, '0')} — ${q.titulo}</span>
+                    <p class="text-xs text-slate-400 leading-relaxed">${q.resp}</p>
+                </div>`;
+            });
+            lucide.createIcons();
+        }
+
+        // DADOS: QUIZ COMPLETO (10 MC + 2 ABERTAS)
+        const quizData = [
+            { id: 1, q: "De acordo com o Slide 3, o pau-brasil era tão valioso na Europa principalmente porque:", opt: ["Servia como madeira barata para construção de navios.", "Produzia tinta vermelha usada em tecidos de luxo.", "Era usado como combustível nas indústrias.", "Era considerado madeira sagrada pelos europeus."], correct: 1 },
+            { id: 2, q: "No Slide 4, o sistema plantation é definido como:", opt: ["Pequenas propriedades familiares com produção variada.", "Comércio livre entre colônias e outros países.", "Latifúndio, monocultura e trabalho escravizado.", "Mineração artesanal com trabalho livre."], correct: 2 },
+            { id: 3, q: "Segundo o Slide 5, a pecuária ajudou a ocupar o interior do Brasil porque:", opt: ["As fazendas de gado avançavam para o sertão, levando pessoas e povoados.", "O gado era criado apenas nas capitais litorâneas.", "O gado substituiu o cultivo de açúcar no litoral.", "A Coroa proibiu a criação de gado no interior."], correct: 0 },
+            { id: 4, q: "O Slide 6 destaca que muitas cidades mineiras 'pararam no tempo' porque:", opt: ["Foram completamente destruídas em guerras coloniais.", "Foram abandonadas e desapareceram sem deixar vestígios.", "Foram transformadas em plantações de café.", "Após o fim do ouro, deixaram de crescer e preservaram a arquitetura colonial."], correct: 3 },
+            { id: 5, q: "No Slide 7, as 'drogas do sertão' eram:", opt: ["Substâncias proibidas vendidas no mercado ilegal.", "Especiarias, ervas e produtos naturais valiosos da floresta amazônica.", "Remédios produzidos nas cidades coloniais.", "Bebidas alcoólicas produzidas nas fazendas."], correct: 1 },
+            { id: 6, q: "De acordo com o Slide 8, o ciclo do açúcar se concentrou principalmente:", opt: ["Na região amazônica.", "No sul do Brasil.", "No Nordeste, em cidades como Salvador e Recife.", "No centro-oeste brasileiro."], correct: 2 },
+            { id: 7, q: "O Slide 9 aponta como herança da colônia, entre outras:", opt: ["Cidades históricas, concentração de terras e desigualdade social.", "Extinção completa das tradições culturais.", "Igualdade total na distribuição de terras.", "Fim das diferenças regionais no Brasil."], correct: 0 },
+            { id: 8, q: "No Slide 10, 'história não é passado, é explicação do presente' significa que:", opt: ["O passado deve ser esquecido para que o presente funcione.", "A história é apenas um conjunto de datas para decorar.", "Os acontecimentos do presente não têm relação com o passado.", "Problemas e estruturas atuais têm origem em processos históricos como os ciclos coloniais."], correct: 3 },
+            { id: 9, q: "Pelo que se vê nos Slides 3 e 4, um ponto em comum entre pau-brasil e açúcar é que:", opt: ["Ambos usavam apenas mão de obra livre.", "Ambos dependiam de trabalho forçado de populações exploradas.", "Ambos se desenvolveram principalmente na Amazônia.", "Ambos foram controlados apenas por indígenas."], correct: 1 },
+            { id: 10, q: "O Slide 8 mostra que cada ciclo econômico ocupou uma parte do território. Isso ajuda a entender que:", opt: ["A economia não teve influência na ocupação do território.", "Todas as atividades econômicas ocorreram na mesma região.", "Atividades econômicas diferentes puxaram a ocupação para regiões diferentes.", "O território brasileiro foi ocupado de forma aleatória."], correct: 2 },
+            { id: 11, tipo: 'aberta', q: "Questão Aberta — Conexão Local", sub: "Indique uma herança da economia colonial que você percebe na sua cidade ou região e explique rapidamente sua relação com um dos ciclos estudados." },
+            { id: 12, tipo: 'aberta', q: "Questão Aberta — Reflexão", sub: "Em uma frase, explique a ideia do Slide 10: 'História não é passado. É explicação do presente'." }
+        ];
+
+        function renderQuiz() {
+            const box = document.getElementById('quiz-box');
+            if (!box) return;
+            box.innerHTML = '';
+            quizData.forEach(item => {
+                if (item.tipo === 'aberta') {
+                    box.innerHTML += `
+                    <div class="bg-slate-900/40 border border-slate-800 p-8 rounded-[32px]" data-aos="fade-up">
+                        <span class="text-indigo-400 font-bold text-xs uppercase tracking-widest mb-3 block">QUESTÃO ${String(item.id).padStart(2, '0')} — ABERTA</span>
+                        <h4 class="text-xl text-white mb-3 font-outfit">${item.q}</h4>
+                        <p class="text-slate-400 text-sm mb-6">${item.sub}</p>
+                        <textarea class="w-full min-h-[100px] bg-slate-800 border border-slate-700 rounded-2xl p-4 text-slate-200 text-sm placeholder-slate-600 focus:outline-none focus:border-primary resize-none" placeholder="Escreva sua resposta aqui..."></textarea>
+                    </div>`;
+                } else {
+                    const optsHtml = item.opt.map((o, i) => `
+                        <button onclick="checkAnswer(this, ${i === item.correct})" data-correct="${i === item.correct}" class="question-card text-left p-5 border border-slate-800 rounded-2xl hover:bg-slate-800 transition-all flex items-center gap-4">
+                            <span class="w-8 h-8 rounded-lg border border-slate-700 flex items-center justify-center text-xs font-bold shrink-0">${String.fromCharCode(65 + i)}</span>
+                            <span class="text-slate-300 text-sm leading-relaxed">${o}</span>
+                        </button>`).join('');
+                    box.innerHTML += `
+                    <div class="bg-slate-900/40 border border-slate-800 p-8 rounded-[32px]" data-aos="fade-up">
+                        <span class="text-emerald-400 font-bold text-xs uppercase tracking-widest mb-3 block">QUESTÃO ${String(item.id).padStart(2, '0')}</span>
+                        <h4 class="text-lg text-white mb-6 font-outfit">${item.q}</h4>
+                        <div class="grid grid-cols-1 gap-3">${optsHtml}</div>
+                    </div>`;
+                }
+            });
+            lucide.createIcons();
+        }
+
+        // ROTEIRO COMPLETO (11 SLIDES, estilo YouTube)
+        const roteiroData = [
+            { slide: 1, tag: "Abertura", tempo: "30–40s", fala: "E aí, galera! Hoje a gente vai viajar no tempo até o Brasil Colônia... mas calma, não é aquela aula chata de decoreba não. A gente vai entender como o DINHEIRO, o TRABALHO e a EXPLORAÇÃO literalmente desenharam o mapa do Brasil que você conhece hoje. Sabe por que tem tanta cidade histórica em Minas Gerais? Por que o Nordeste foi TÃO importante? Por que o interior do Brasil demorou tanto pra ser ocupado? TUDO isso tem a ver com a economia colonial. Bora lá? 🚀", dica: "Fale com energia. Pause 2s depois de 'exploração'. Aponte para o mapa ao falar 'desenharam'." },
+            { slide: 2, tag: "Objetivos", tempo: "20s", fala: "Nessa aula você vai reconhecer os principais ciclos econômicos, ver como cada um puxou a ocupação pra uma parte diferente do Brasil, e perceber que as marcas desse período ainda estão VIVAS hoje. Então... vamos começar pelo começo.", dica: "Passe rápido pelos tópicos. Enfatize 'VIVAS'. Transição suave: 'vamos começar pelo começo'." },
+            { slide: 3, tag: "Pau-Brasil", tempo: "40–50s", fala: "Quando os portugueses chegaram em 1500, a primeira coisa que exploraram foi o PAU-BRASIL. Por quê? Porque a madeira tinha uma tinta VERMELHA super valiosa na Europa, usada pra tingir tecidos de luxo. O problema? Os portugueses FORÇARAM os indígenas a trabalhar. E olha o resultado: grande parte da Mata Atlântica foi DESTRUÍDA. Mas espera... o pau-brasil foi só o começo. O próximo ciclo ia ser MUITO maior.", dica: "Pause antes de 'DESTRUÍDA'. Use 'mas espera...' como gancho de retenção." },
+            { slide: 4, tag: "Açúcar", tempo: "50–60s", fala: "Agora vem o MEGA PROJETO do Brasil Colônia: a cana-de-açúcar. Nos séculos 16 e 17, o Nordeste virou uma MÁQUINA de produzir açúcar pra Europa. Mas esse sistema tinha um nome: PLANTATION. Plantation = latifúndio + monocultura + trabalho escravizado de africanos. E aqui vem a parte pesada: esse modelo criou uma desigualdade BRUTAL que a gente ainda sente hoje. Concentração de terras, racismo estrutural... tudo começa aqui.", dica: "Explique plantation devagar. Tom sério ao falar de escravidão. Conecte com o presente." },
+            { slide: 5, tag: "Pecuária", tempo: "35s", fala: "O litoral já tá ocupado com os engenhos. Mas e o INTERIOR do Brasil? Quem foi lá? A resposta é: O GADO. A criação de gado se espalhou pelo sertão nordestino, indo cada vez mais pra dentro. E conforme as fazendas avançavam, os povoados iam junto. Foi a pecuária que EMPURROU o Brasil pra dentro. Literalmente.", dica: "Gesto de empurrar ao dizer 'EMPURROU'. Aponte do litoral pro interior no mapa." },
+            { slide: 6, tag: "Mineração", tempo: "50s", fala: "No final do século 17, acontece o que TODO colonizador sonhava: descobriram OURO em Minas Gerais. De repente, todo mundo queria ir pras minas. Cidades NASCERAM do nada: Ouro Preto, Mariana, Tiradentes... Mas aqui vem o plot twist: o ouro não durou pra sempre. E quando acabou, muitas dessas cidades pararam no tempo. Por isso Minas Gerais tem TANTO lugar histórico. Foi tudo herança da corrida do ouro.", dica: "Use 'plot twist' com energia. Mostre foto de Ouro Preto. Enfatize 'OURO'." },
+            { slide: 7, tag: "Drogas do Sertão", tempo: "35s", fala: "Enquanto isso, na Amazônia rolava outro tipo de exploração: as DROGAS DO SERTÃO. Não, não são drogas no sentido que você tá pensando. Era o nome dos produtos naturais da floresta: especiarias, ervas, resinas... raras e valiosas na Europa. E como exploravam? Pelos RIOS. Foi isso que manteve Portugal na Amazônia e garantiu que ela fizesse parte do Brasil.", dica: "Esclareça o termo logo. Gesto de remar ao falar dos rios." },
+            { slide: 8, tag: "Economia e Território", tempo: "40s", fala: "Junta tudo que a gente viu: pau-brasil no litoral, açúcar criando vilas no Nordeste, pecuária indo pro interior, ouro fazendo cidades em Minas, drogas do sertão garantindo a Amazônia... CADA ciclo econômico PUXOU a ocupação pra uma parte diferente do Brasil. E aí nasceram as rotas, os portos, as vilas, as cidades. A economia DESENHOU o mapa. Literalmente.", dica: "Leia a lista com ritmo. Aponte para o mapa. Enfatize 'DESENHOU o mapa'." },
+            { slide: 9, tag: "Heranças Coloniais", tempo: "35s", fala: "Cidades como Salvador, Recife e Ouro Preto NASCERAM por causa desses ciclos. E não é só arquitetura: a culinária, as festas, os sotaques, a música... tudo tem raiz na mistura de indígenas, africanos e portugueses dessa época. Pergunta pra você: que marca da economia colonial você consegue ver na SUA cidade? Comenta aí embaixo! 👇", dica: "Olhe direto para a câmera na pergunta final. Tom leve." },
+            { slide: 10, tag: "Síntese", tempo: "30s", fala: "Resumindo: do pau-brasil ao ouro, cada ciclo econômico mudou o mapa do Brasil. Essas atividades organizaram quem tinha poder, onde as pessoas moravam e como a sociedade funcionava. Se você quer entender o Brasil de HOJE... precisa entender a economia colonial. Porque história não é passado. História é explicação do presente.", dica: "Fale devagar. Pause 3s na última frase. Tom sério e firme." },
+            { slide: 11, tag: "Encerramento", tempo: "20s", fala: "E agora é hora de colocar isso no papel. Questões com análise crítica, mapa para marcar os ciclos e uma discussão sobre heranças na sua região. Bora lá? ✏️ Não esquece de deixar o like se a aula foi 🔥 e de me seguir para mais aulas assim!", dica: "Tom motivador. Transição suave para o momento escrito." }
+        ];
+
+        function renderRoteiro() {
+            const box = document.getElementById('roteiro-box');
+            if (!box) return;
+            box.innerHTML = '';
+            roteiroData.forEach(r => {
+                box.innerHTML += `
+                <div class="bg-slate-900/40 border border-slate-800 p-8 rounded-3xl" data-aos="fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-full text-xs font-bold uppercase">Slide ${r.slide} — ${r.tag}</span>
+                        <span class="text-slate-600 text-xs">⏱ ${r.tempo}</span>
+                    </div>
+                    <blockquote class="text-slate-300 text-base leading-relaxed italic border-l-4 border-emerald-500 pl-5 mb-5">${r.fala}</blockquote>
+                    <p class="text-amber-500/70 text-xs">💡 ${r.dica}</p>
+                </div>`;
+            });
+            lucide.createIcons();
+        }
+
+        // Inicializa o hub ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>
